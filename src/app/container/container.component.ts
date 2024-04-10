@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { ProductListComponent } from './product-list/product-list.component';
 
 @Component({
   selector: 'app-container',
@@ -6,35 +7,11 @@ import { Component } from '@angular/core';
   styleUrl: './container.component.css'
 })
 export class ContainerComponent {
+  searchText: string = "";
 
-  addToCart: number = 0;
-  product = {
-    image:'assets/images/iphone.png',
-    name: "iPhone X",
-    price: 789,
-    color: "Black",
-    discount: 8.5,
-    inStock: 5
-  }
+  @ViewChild(ProductListComponent) productListComponent: ProductListComponent;
 
-
-  getDiscountedPrice(){
-    return this.product.price - (this.product.price * this.product.discount / 100)
-  }
-
-  onNameChange(event: any){
-    //this.name = event.target.value; 
-  }
-
-  decrementCartValue(){
-    if(this.addToCart > 0){
-      this.addToCart--;
-    }
-  }
-
-  incrementCartValue(){
-    if(this.addToCart < this.product.inStock){
-      this.addToCart++;
-    }
+  setSearchText(value: string) {
+    this.searchText = value;
   }
 }
